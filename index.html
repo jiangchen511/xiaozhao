@@ -1,0 +1,3090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>供应链校招全攻略</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.12.16/dist/framer-motion.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        :root {
+            --highlight-color: #e2211c;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .highlight {
+            color: var(--highlight-color);
+        }
+        
+        .highlight-bg {
+            background-color: var(--highlight-color);
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(180deg, rgba(226, 33, 28, 0.8) 0%, rgba(226, 33, 28, 0) 100%);
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .reveal-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mega-text {
+            font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.9;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        .en-accent {
+            font-family: 'SF Pro Text', Arial, sans-serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+        
+        .number-highlight {
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            line-height: 0.8;
+        }
+        
+        .line-graphic {
+            stroke: var(--highlight-color);
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+        }
+
+        nav.bg-black {
+             background-color: rgba(0,0,0,0.8) !important;
+             color: #fff;
+             backdrop-filter: blur(10px);
+             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+             transition: all 0.3s ease-in-out;
+        }
+        nav.bg-black a {
+            color: #fff;
+            position: relative;
+        }
+        nav.bg-black a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+        nav.bg-black a:hover:after {
+            width: 100%;
+        }
+        nav.bg-black a:hover {
+            color: var(--highlight-color);
+        }
+        nav.bg-black .highlight {
+             color: var(--highlight-color) !important;
+        }
+
+        #hero h1, #hero p {
+            color: #fff;
+        }
+         #hero .opacity-80 {
+            opacity: 0.8;
+        }
+
+        section h2, section h3, section h4, section p, section li, section th, section td { /* Added th, td for tables */
+            color: #fff;
+        }
+        section .opacity-70 {
+            opacity: 0.7;
+            color: #fff;
+        }
+         section .opacity-80 {
+            opacity: 0.8;
+            color: #e0e0e0;
+        }
+        section .highlight {
+            color: var(--highlight-color) !important;
+        }
+        section .font-bold {
+            color: #fff;
+        }
+        
+        .bg-gray-900, .bg-gray-950, .bg-black {
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .bg-gray-900:hover, .bg-gray-950:hover, .bg-black:hover {
+            box-shadow: 0 10px 25px rgba(226, 33, 28, 0.1);
+            transform: translateY(-5px);
+        }
+        .bg-gray-900 p, .bg-gray-950 p, .bg-black p,
+        .bg-gray-900 h3, .bg-gray-950 h3, .bg-black h3,
+        .bg-gray-900 h4, .bg-gray-950 h4, .bg-black h4,
+        .bg-gray-900 li, .bg-gray-950 li, .bg-black li,
+        .bg-gray-900 th, .bg-gray-950 th, .bg-black th, /* Added th for tables in dark cards */
+        .bg-gray-900 td, .bg-gray-950 td, .bg-black td, /* Added td for tables in dark cards */
+        .bg-gray-900 .opacity-80, .bg-gray-950 .opacity-80, .bg-black .opacity-80 {
+            color: #e0e0e0;
+        }
+        .bg-gray-900 .font-bold, .bg-gray-950 .font-bold, .bg-black .font-bold {
+            color: #fff;
+        }
+         .bg-gray-900 .highlight, .bg-gray-950 .highlight, .bg-black .highlight {
+            color: var(--highlight-color) !important;
+        }
+
+        svg text {
+            fill: white;
+        }
+
+        /* Table styling */
+        .custom-table {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: rgba(226, 33, 28, 0.2); /* Highlight color with transparency */
+            font-weight: bold;
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: rgba(255,255,255,0.05);
+        }
+        .custom-table .en-accent {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        /* 新增的動畫和互動樣式 */
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(226, 33, 28, 0.15);
+        }
+        
+        .icon-bounce {
+            animation: iconBounce 2s infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-8px);}
+            60% {transform: translateY(-4px);}
+        }
+        
+        .glow-effect {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(226, 33, 28, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-highlight {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(226, 33, 28, 0.25);
+        }
+        
+        .btn-highlight::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .btn-highlight:hover::after {
+            left: 100%;
+        }
+        
+        .typing-effect {
+            border-right: 2px solid var(--highlight-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--highlight-color) }
+        }
+        
+        /* 響應式設計強化 */
+        @media (max-width: 768px) {
+            .mega-text {
+                font-size: clamp(2.5rem, 8vw, 6rem);
+            }
+            
+            .number-highlight {
+                font-size: clamp(3rem, 12vw, 8rem);
+            }
+            
+            .mobile-menu {
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        /* 細節和互動性改進 */
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--highlight-color), transparent);
+            margin: 3rem 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .float-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .rotate-animation {
+            animation: rotating 10s linear infinite;
+        }
+        
+        @keyframes rotating {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 小紅書模塊樣式 */
+        .xiaohongshu-section {
+            padding: 4rem 0;
+            background-color: #121212;
+        }
+        
+        /* OfferShow APP模块样式 */
+        .recruitment-app-section {
+            padding: 5rem 0;
+            background-color: #0a0a0a;
+            position: relative;
+        }
+        
+        .offershow-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background-color: #1a1a1a;
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(226, 33, 28, 0.2);
+        }
+        
+        .feature-image {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #2a2a2a;
+        }
+        
+        .feature-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: all 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-img {
+            transform: scale(1.05);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
+        }
+        
+        .feature-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        .app-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .app-download-btn {
+            display: inline-block;
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        
+        .app-download-btn:hover {
+            background-color: #ff4b4b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(226, 33, 28, 0.3);
+        }
+        
+        .app-hint {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .xiaohongshu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .xiaohongshu-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .xiaohongshu-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #e2211c, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .xiaohongshu-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .xiaohongshu-card {
+            background-color: #1a1a1a;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .xiaohongshu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(226, 33, 28, 0.2);
+        }
+        
+        .xiaohongshu-banner {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8), rgba(226, 33, 28, 0.1));
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .xiaohongshu-logo {
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+        
+        .xiaohongshu-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--highlight-color);
+        }
+        
+        .xiaohongshu-profile {
+            flex-grow: 1;
+        }
+        
+        .xiaohongshu-profile h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .xiaohongshu-profile p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .xiaohongshu-follow {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .xiaohongshu-follow:hover {
+            background-color: #ff4b4b;
+        }
+        
+        .xiaohongshu-follow i {
+            margin-right: 0.3rem;
+        }
+        
+        .xiaohongshu-content {
+            padding: 1.5rem;
+        }
+        
+        .xiaohongshu-categories {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+        }
+        
+        .xiaohongshu-categories::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .xiaohongshu-category {
+            padding: 0.5rem 1rem;
+            margin-right: 0.8rem;
+            background-color: #2a2a2a;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .xiaohongshu-category i {
+            margin-right: 0.3rem;
+        }
+        
+        .xiaohongshu-category.active,
+        .xiaohongshu-category:hover {
+            background-color: var(--highlight-color);
+            color: white;
+        }
+        
+        .xiaohongshu-articles {
+            display: none;
+        }
+        
+        .xiaohongshu-articles.active {
+            display: block;
+        }
+        
+        .xiaohongshu-article {
+            padding: 1.2rem;
+            background-color: #222;
+            border-radius: 0.8rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .xiaohongshu-article:hover {
+            transform: translateY(-3px);
+            background-color: #2a2a2a;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .article-tag {
+            color: var(--highlight-color);
+            font-weight: 500;
+        }
+        
+        .article-date {
+            opacity: 0.6;
+        }
+        
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-excerpt {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .article-stats {
+            display: flex;
+        }
+        
+        .article-stat {
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .article-stat i {
+            margin-right: 0.3rem;
+        }
+        
+        .read-more {
+            font-size: 0.85rem;
+            color: var(--highlight-color);
+            font-weight: 500;
+        }
+        
+        .xiaohongshu-more {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-more {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(90deg, var(--highlight-color), #ff6b6b);
+            color: white;
+            font-weight: 500;
+            border-radius: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(226, 33, 28, 0.3);
+        }
+        
+        .btn-more i {
+            margin-left: 0.5rem;
+        }
+        
+        /* 供應鏈薪水模塊樣式 */
+        .salary-section {
+            padding: 4rem 0;
+            background-color: #0a0a0a;
+        }
+        
+        .salary-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .salary-card {
+            background: linear-gradient(145deg, #1e1e1e, #121212);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .salary-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(226, 33, 28, 0.2);
+        }
+        
+        .salary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--highlight-color), #ff6b6b);
+            z-index: 2;
+        }
+        
+        .salary-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .salary-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #e2211c, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .salary-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .salary-info {
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .salary-stat {
+            width: 30%;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .salary-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .salary-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .salary-footer {
+            padding: 1.5rem 2rem;
+            background-color: rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .salary-footer a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, var(--highlight-color), #ff6b6b);
+            color: white;
+            font-weight: 500;
+            border-radius: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .salary-footer a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(226, 33, 28, 0.3);
+        }
+        
+        /* 合工大群模塊樣式 */
+        .qq-group-section {
+            padding: 4rem 0;
+            background-color: #0a0a0a;
+        }
+        
+        .qq-group-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        
+        .qq-group-header {
+            margin-bottom: 2.5rem;
+        }
+        
+        .qq-group-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #e2211c, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .qq-group-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        .qq-group-card {
+            background-color: #1a1a1a;
+            border-radius: 1rem;
+            padding: 2rem;
+            display: inline-block;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .qq-group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(226, 33, 28, 0.2);
+        }
+        
+        .qq-group-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .qq-group-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--highlight-color);
+            overflow: hidden;
+        }
+        
+        .qq-group-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .qq-group-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .qq-group-id {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        
+        .qq-group-qrcode {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        
+        .qq-group-qrcode img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .qq-group-hint {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .xiaohongshu-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .xiaohongshu-logo {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .xiaohongshu-follow {
+                margin-top: 1rem;
+            }
+            
+            .salary-stat {
+                width: 100%;
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 申请追踪模块样式 */
+        .tracker-section {
+            padding: 3rem 0;
+            background-color: #121212;
+            margin-top: 2rem;
+        }
+        
+        .tracker-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .section-intro {
+            font-size: 1.1rem;
+            text-align: center;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .tracker-demo {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: #222;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .tracker-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .stat-card {
+            background-color: #2a2a2a;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .stat-card.highlight h3 {
+            color: var(--highlight-color);
+        }
+        
+        .add-application-btn {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .add-application-btn:hover {
+            background-color: #ff4b4b;
+            transform: translateY(-2px);
+        }
+        
+        .tracker-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
+        .table-header {
+            display: flex;
+            background-color: #2a2a2a;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .table-row {
+            display: flex;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .table-row:hover {
+            background-color: #222;
+        }
+        
+        .col {
+            flex: 1;
+            padding: 0 0.5rem;
+        }
+        
+        .col.company {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .col.company img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        .status.applied {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+        
+        .status.interview {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+        
+        .status.offer {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+        
+        .btn-detail {
+            background-color: #2a2a2a;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .btn-detail:hover {
+            background-color: var(--highlight-color);
+        }
+        
+        /* 求职网站导航样式 */
+        .job-links-section {
+            padding: 4rem 0;
+            background-color: #0a0a0a;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .link-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(226, 33, 28, 0.2);
+        }
+        
+        .link-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            background-color: #2a2a2a;
+            padding: 10px;
+        }
+        
+        .link-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="relative">
+    <nav class="fixed top-0 w-full z-50 bg-black bg-opacity-80 backdrop-blur-md py-4 px-6">
+        <div class="flex justify-between items-center">
+            <div class="text-xl font-bold flex items-center">
+                <span class="highlight">SUPPLY CHAIN</span>&nbsp;&nbsp;&nbsp;校招攻略
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#intro" class="hover:highlight transition-colors relative group">
+                    引言
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#industry" class="hover:highlight transition-colors relative group">
+                    行业概况
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#internship" class="hover:highlight transition-colors relative group">
+                    实习规划
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#resume" class="hover:highlight transition-colors relative group">
+                    简历技巧
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#interview" class="hover:highlight transition-colors relative group">
+                    面试攻略
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#offer" class="hover:highlight transition-colors relative group">
+                    Offer选择
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+            <div class="md:hidden">
+                <i class="fas fa-bars text-xl cursor-pointer hover:highlight transition-colors"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 gradient-overlay opacity-20"></div>
+        <div class="absolute inset-0 bg-black opacity-80 z-0"></div>
+        <!-- 背景動畫元素 -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute w-64 h-64 rounded-full bg-red-600 opacity-10 blur-3xl top-1/4 -right-20 rotate-animation"></div>
+            <div class="absolute w-96 h-96 rounded-full bg-red-600 opacity-5 blur-3xl bottom-1/4 -left-32 float-animation"></div>
+        </div>
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="text-center">
+                <h1 class="mega-text mb-4 text-shadow">
+                    供应链校招<span class="highlight">全攻略</span>
+                </h1>
+                <p class="text-2xl md:text-4xl mb-8 opacity-80 typing-effect mx-auto max-w-3xl">从简历准备到offer获取，一站式供应链校招解决方案</p>
+                <div class="en-accent text-sm uppercase tracking-widest mb-12">
+                    <span class="highlight">SUPPLY CHAIN</span> RECRUITMENT GUIDE
+                </div>
+                <div class="mt-12">
+                    <a href="#intro" class="btn-highlight inline-block mx-auto">
+                        开始探索 <i class="fas fa-chevron-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="scroll-indicator mt-16">
+                    <i class="fas fa-chevron-down text-2xl highlight icon-bounce"></i>
+                </div>
+            </div>
+        </div>
+        <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path class="line-graphic" d="M0,50 C240,100 480,0 720,50 C960,100 1200,0 1440,50 L1440,100 L0,100 Z"></path>
+        </svg>
+    </section>
+
+    <section id="intro" class="py-24 reveal-section">
+        <div class="container mx-auto px-6">
+            <div class="bento-grid">
+                <div class="col-span-12 md:col-span-6 flex flex-col justify-center">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-8 text-shadow">
+                        开场<span class="highlight">引言</span>
+                    </h2>
+                    <p class="text-xl leading-relaxed mb-6">
+                        亲爱的学弟学妹们，大家下午好！非常荣幸今天能有机会站在这里，以一个刚刚经历过校招"洗礼"的物流专业学长的身份，和大家聊聊咱们供应链行业的校园招聘。
+                    </p>
+                    <p class="text-xl leading-relaxed">
+                    作为一名物流专业的本科生，和许多同龄人一样，我曾深陷专业认知误区，认为物流等同于"送快递""搬货仓"，职业前景黯淡。希望能通过我的科普与讲解能改变大家的认知
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-6 flex items-center justify-center">
+                    <div class="relative glow-effect">
+                        <div class="absolute -inset-1 highlight-bg opacity-20 rounded-lg blur-xl"></div>
+                        <div class="relative bg-black p-8 rounded-lg border border-gray-800 card-hover-effect">
+                            <div class="text-sm en-accent uppercase tracking-widest mb-4 highlight">ABOUT ME</div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden">
+                                    <img src="touxiang.jpg" alt="姜昌林" class="w-full h-full object-cover">
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-2xl font-bold">姜昌林</h3>
+                                    <p class="opacity-70">物流管理21-2班</p>
+                                </div>
+                            </div>
+                            <p class="text-lg">
+                            个人介绍：专业成绩前30%，中共党员，有两段实习经历：济南铁路局供应链的日常实习和美的集团供应链的暑期实习；小一年的供应链电商运营创业经历。秋招共拿到25家供应链offer，12家世界五百强offer；4家20w+offer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="industry" class="py-24 bg-black reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center">
+                中国<span class="highlight">供应链行业</span>的机遇与挑战
+            </h2>
+            <div class="bento-grid">
+                <div class="col-span-12 md:col-span-5 flex flex-col justify-center">
+                    <p class="text-xl leading-relaxed mb-6">
+                        我们所处的时代，中国供应链行业正经历着前所未有的发展与变革。它是支撑国民经济高效运转的"大动脉"，无论是大家日常接触的电商快递，还是国家层面强调的"新质生产力"发展，都离不开强大而智慧的供应链体系。
+                    </p>
+                    <p class="text-xl leading-relaxed">
+                    供应链领域长期存在"专业认知错配"现象。传统观念将供应链物流等同于基层操作，却忽略其在企业价值链中的战略地位。以头部科技企业为例，华为供应链管理工程师需统筹全球14000+供应商的交付周期优化，宝洁供应链管培生需通过S&OP（销售与运营计划）平衡亚太区20余工厂的产能分配。此类岗位不仅要求掌握物流规划、库存优化等专业技能，还需具备跨部门协同、数据分析与商业决策能力。
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-7">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-24 h-24 highlight-bg opacity-10 rounded-full -mr-8 -mt-8"></div>
+                            <h3 class="text-2xl font-bold mb-4">供应链人才需求</h3>
+                            <div class="flex items-center mb-2">
+                                <span class="text-4xl font-bold highlight">32.6</span>
+                                <span class="ml-2 text-lg">万人</span>
+                            </div>
+                            <p class="opacity-80">2024年供应链岗位人才缺口</p>
+                            <div class="mt-4">
+                                <p>其中<span class="highlight font-bold">智能供应链</span>与<span class="highlight font-bold">绿色供应链</span>领域增长最快</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-24 h-24 highlight-bg opacity-10 rounded-full -mr-8 -mt-8"></div>
+                            <h3 class="text-2xl font-bold mb-4">供应链专业薪资</h3>
+                            <div class="flex items-center mb-2">
+                                <span class="text-4xl font-bold highlight">10.8</span>
+                                <span class="ml-2 text-lg">K/月</span>
+                            </div>
+                            <p class="opacity-80">2024年应届生平均起薪</p>
+                            <div class="mt-4">
+                                <p>高于全行业平均水平<span class="highlight font-bold">23%</span></p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                                <h3 class="text-2xl font-bold mb-4">结构性变化</h3>
+                                <div class="flex flex-wrap gap-4 mt-4">
+                                    <div class="px-4 py-2 bg-black rounded-full border border-gray-800">
+                                        <span class="highlight"><i class="fas fa-robot mr-2"></i></span>人工智能
+                                    </div>
+                                    <div class="px-4 py-2 bg-black rounded-full border border-gray-800">
+                                        <span class="highlight"><i class="fas fa-database mr-2"></i></span>大数据
+                                    </div>
+                                    <div class="px-4 py-2 bg-black rounded-full border border-gray-800">
+                                        <span class="highlight"><i class="fas fa-cloud mr-2"></i></span>云计算
+                                    </div>
+                                    <div class="px-4 py-2 bg-black rounded-full border border-gray-800">
+                                        <span class="highlight"><i class="fas fa-industry mr-2"></i></span>智能制造
+                                    </div>
+                                    <div class="px-4 py-2 bg-black rounded-full border border-gray-800">
+                                        <span class="highlight"><i class="fas fa-bolt mr-2"></i></span>新能源
+                                    </div>
+                                </div>
+                                <p class="mt-4">这些领域的企业依然在持续扩大招聘，并专门开设了供应链管理等岗位</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="content" class="py-24 reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center" data-aos="fade-up">
+                本次分享的<span class="highlight">核心内容</span>预告
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="col-span-1 md:col-span-3 mb-8">
+                    <p class="text-xl text-center max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                        那么，面对这样的行业态势，我们应该如何准备呢？今天的分享，我将围绕以下几个核心环节展开：
+                    </p>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden group card-hover-effect" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 highlight-bg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4 float-animation">
+                            <span class="text-2xl font-bold">1</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">能力塑造</h3>
+                    </div>
+                    <p class="text-lg">实习准备与规划——如何找到有价值的实习？实习中应该学什么？</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="#internship" class="text-red-500 hover:text-red-400 transition-colors flex items-center">
+                            详细了解 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden group card-hover-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute inset-0 highlight-bg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4 float-animation">
+                            <span class="text-2xl font-bold">2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">脱颖而出</h3>
+                    </div>
+                    <p class="text-lg">简历制作核心技巧——如何让你的简历在众多申请者中抓住HR的眼球？</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="#resume" class="text-red-500 hover:text-red-400 transition-colors flex items-center">
+                            详细了解 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden group card-hover-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute inset-0 highlight-bg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4 float-animation">
+                            <span class="text-2xl font-bold">3</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">决胜面试</h3>
+                    </div>
+                    <p class="text-lg">面试准备全攻略——从常见问题到专业拷问，从单打独斗到团队作战，如何应对自如？</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="#interview" class="text-red-500 hover:text-red-400 transition-colors flex items-center">
+                            详细了解 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden group card-hover-effect" data-aos="fade-up" data-aos-delay="400">
+                    <div class="absolute inset-0 highlight-bg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4 float-animation">
+                            <span class="text-2xl font-bold">4</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">运筹帷幄</h3>
+                    </div>
+                    <p class="text-lg">投递策略与时间管理——校招的"时间表"是怎样的？如何高效投递，不错过机会？</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="#strategy" class="text-red-500 hover:text-red-400 transition-colors flex items-center">
+                            详细了解 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 relative overflow-hidden group card-hover-effect" data-aos="fade-up" data-aos-delay="500">
+                    <div class="absolute inset-0 highlight-bg opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4 float-animation">
+                            <span class="text-2xl font-bold">5</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">决策框架</h3>
+                    </div>
+                    <p class="text-lg">Offer选择与职业规划初步——手握多个Offer时如何抉择？第一份工作对未来意味着什么？</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="#offer" class="text-red-500 hover:text-red-400 transition-colors flex items-center">
+                            详细了解 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-span-1 md:col-span-3 mt-8">
+                    <div class="section-divider" data-aos="fade-up"></div>
+                    <p class="text-xl text-center max-w-3xl mx-auto mt-8" data-aos="fade-up" data-aos-delay="100">
+                        希望通过这五个部分的讲解，能帮助大家打通求职路上的"任督二脉"，顺利开启职业生涯的新篇章。
+                    </p>
+                    <div class="flex justify-center mt-8" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#internship" class="btn-highlight">
+                            立即开始学习 <i class="fas fa-graduation-cap ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="internship" class="py-24 bg-gray-950 reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center">
+                能力塑造：<span class="highlight">实习准备</span>与规划
+            </h2>
+            
+            <div class="bento-grid mb-16">
+                <div class="col-span-12 md:col-span-6 flex flex-col justify-center">
+                    <h3 class="text-3xl font-bold mb-6">实习：从"体验"到"核心竞争力"</h3>
+                    <p class="text-xl leading-relaxed mb-6">
+                        在当前的校招环境下，实习早已不是一个可有可无的"体验"项目，而是你简历上至关重要的"核心竞争力"。
+                    </p>
+                    <p class="text-xl leading-relaxed">
+                        对于低年级阶段以中小型企业供应链基础岗位为主攻方向，例如区域性物流公司的仓储调度、采购跟单等岗位。此阶段的核心目标是掌握ERP系统操作、订单处理流程、供应商对账等基础技能，建立对供应链全链条的感性认知。大三阶段是实习含金量跃升的关键窗口。建议在大三下学期（3-5月）集中投递世界五百强或行业龙头的暑期实习，此类岗位通常配备转正通道，相当于保底offer；若未斩获暑期实习offer，需在6-7月紧急锁定大企业的日常实习，优先选择能接触核心业务的岗位，如跨境电商企业的海外仓规划、汽车企业的生产计划排程等。
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-6 flex items-center justify-center">
+                    <div class="relative w-full">
+                        <svg viewBox="0 0 400 300" class="w-full">
+                            <path class="line-graphic" d="M50,250 C100,150 150,200 200,100 C250,50 300,150 350,50" />
+                            <circle cx="50" cy="250" r="8" fill="#e2211c" />
+                            <text x="40" y="280" fill="white" font-size="12">入门</text>
+                            <circle cx="200" cy="100" r="8" fill="#e2211c" />
+                            <text x="190" y="80" fill="white" font-size="12">成长</text>
+                            <circle cx="350" cy="50" r="8" fill="#e2211c" />
+                            <text x="340" y="30" fill="white" font-size="12">核心竞争力</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-8">如何高效寻找优质供应链实习？</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-building text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">官方渠道优先考虑</h4>
+                        </div>
+                        <ul class="ml-14 space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>目标企业官网/官方招聘公众号</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>国家级官方招聘平台</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-laptop text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">善用专业招聘网站/APP</h4>
+                        </div>
+                        <ul class="ml-14 space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>实习僧、智联招聘、前程无忧</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>猎聘、应届生求职网、BOSS直聘</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">挖掘校内资源与人脉</h4>
+                        </div>
+                        <ul class="ml-14 space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>学校就业指导中心/学院推荐</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>校友网络/学长学姐内推</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-handshake text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">在社交平台搜索校招分享</h4>
+                        </div>
+                        <ul class="ml-14 space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>小红书、抖音</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>知乎、公众号</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black p-8 rounded-lg">
+                <h3 class="text-3xl font-bold mb-8">实习期间学什么？如何最大化实习价值？</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-sitemap text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">深入理解业务流程</h4>
+                        <p>了解你的岗位在整个供应链条中所处的位置，以及相关的上下游环节是如何运作的。</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-tools text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">积极掌握实用工具</h4>
+                        <p>熟练使用办公软件，特别是Excel，以及在ERP、WMS等专业系统，争取机会学习和操作。</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-chart-line text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">提升数据分析能力</h4>
+                        <p>现代供应链管理高度依赖数据驱动决策。在实习中，如果能参与到数据的采集、清洗、处理、分析以及报告撰写等工作，将对你未来的职业发展大有裨益。</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-comments text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">锻炼沟通协调能力</h4>
+                        <p>供应链工作往往需要和公司内部不同部门以及外部的供应商、客户、物流服务商等进行大量的沟通和协调。要多观察、多学习前辈们是如何有效沟通的。</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-question-circle text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">保持主动思考和提问</h4>
+                        <p>不要仅仅满足于完成导师交办的任务。要多思考，这个流程有没有可以优化的地方？为什么是这样操作而不是那样？遇到不懂的问题，要大胆地、有礼貌地向导师或同事请教。</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 rounded-full highlight-bg mx-auto flex items-center justify-center">
+                                <i class="fas fa-clipboard-list text-2xl"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-center mb-4">用心记录实习成果</h4>
+                        <p>从实习第一天起，就要有意识地记录你参与了哪些项目、完成了哪些具体任务、遇到了什么问题、你是如何思考和解决的，以及最终取得了哪些成果。尽可能地将成果量化。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-xl max-w-3xl mx-auto">
+                    记住，实习是一个双向选择和学习的过程。你的积极主动，不仅能让你学到更多，也会给实习单位留下良好印象， 甚至可能为你争取到转正留用的机会。
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="resume" class="py-24 reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center">
+                出具<span class="highlight">简历制作</span>核心技巧
+            </h2>
+            
+            <div class="bento-grid mb-16">
+                <div class="col-span-12 md:col-span-5 flex flex-col justify-center">
+                    <h3 class="text-3xl font-bold mb-6">简历的核心原则</h3>
+                    <p class="text-xl leading-relaxed mb-6">
+                        当你的实习经历和在校学习有了一定的积累后，下一步就是如何将这些"料"有效地呈现在一张A4纸上，也就是我们常说的简历。简历是求职的"敲门砖"，HR平均花在每份简历上的时间可能非常短，甚至不足<span class="highlight font-bold">30秒</span>。
+                    </p>
+                    <p class="text-xl leading-relaxed">
+                        因此，你的简历必须能够迅速抓住HR的眼球，清晰传递你的核心价值。从根本上说，简历并非简单地记录你过去的经历，它更像是一份为你量身定制的"营销材料"。
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-7">
+                    <div class="relative">
+                        <div class="absolute -inset-1 highlight-bg opacity-20 rounded-lg blur-xl"></div>
+                        <div class="relative bg-black p-8 rounded-lg border border-gray-800">
+                            <div class="number-highlight highlight mb-2">30<span class="text-2xl">秒</span></div>
+                            <p class="text-2xl font-bold mb-4">HR筛选一份简历的平均时间</p>
+                            <div class="grid grid-cols-2 gap-4 mt-8">
+                                <div class="bg-gray-900 p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold mb-2 flex items-center">
+                                        <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-2">
+                                            <i class="fas fa-bullseye"></i>
+                                        </span>
+                                        精准匹配
+                                    </h4>
+                                    <p>仔细阅读职位描述(JD)，分析岗位需求，有针对性地调整简历内容</p>
+                                </div>
+                                <div class="bg-gray-900 p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold mb-2 flex items-center">
+                                        <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-2">
+                                            <i class="fas fa-compress-alt"></i>
+                                        </span>
+                                        简洁明了
+                                    </h4>
+                                    <p>内容精炼，重点突出，使用清晰标准的字体，排版整洁</p>
+                                </div>
+                                <div class="bg-gray-900 p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold mb-2 flex items-center">
+                                        <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-2">
+                                            <i class="fas fa-check-circle"></i>
+                                        </span>
+                                        真实可信
+                                    </h4>
+                                    <p>所有信息必须真实准确，任何形式的夸大或造假都可能导致失去机会</p>
+                                </div>
+                                <div class="bg-gray-900 p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold mb-2 flex items-center">
+                                        <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-2">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                        无懈可击
+                                    </h4>
+                                    <p>提交前反复检查，确保没有错别字、语法错误或标点符号使用不当等问题</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-24">
+                <h3 class="text-3xl font-bold mb-12 text-center">供应链专业简历的关键模块</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">基本信息</h4>
+                        </div>
+                        <p class="mb-4">包括姓名、电话号码、电子邮箱、求职意向</p>
+                        <div class="bg-black p-3 rounded-lg text-sm opacity-80">
+                            <p><i class="fas fa-lightbulb highlight mr-2"></i>建议使用专业的邮箱地址，避免过于个性化的名称</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-graduation-cap text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">教育背景</h4>
+                        </div>
+                        <p class="mb-4">按时间倒序列出你的学校、专业、学历、在校时间</p>
+                        <div class="bg-black p-3 rounded-lg text-sm opacity-80">
+                            <p><i class="fas fa-lightbulb highlight mr-2"></i>可以酌情列出与申请岗位相关的核心课程及成绩（如果成绩优秀）</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-briefcase text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">实习经历</h4>
+                        </div>
+                        <p class="mb-4">这是简历的重中之重！同样按时间倒序列出</p>
+                        <div class="bg-black p-3 rounded-lg text-sm opacity-80">
+                            <p><i class="fas fa-lightbulb highlight mr-2"></i>每一段实习经历都应包含：公司名称、所在部门及职位、实习时间段、工作职责和主要成就</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-project-diagram text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">项目经历</h4>
+                        </div>
+                        <p class="mb-4">与供应链相关的课程设计、学科竞赛、科研项目或社会实践项目</p>
+                        <div class="bg-black p-3 rounded-lg text-sm opacity-80">
+                            <p><i class="fas fa-lightbulb highlight mr-2"></i>说明你在项目中的角色、任务和取得的成果</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-tools text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">技能证书</h4>
+                        </div>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check-circle highlight mr-2"></i><strong>硬技能：</strong>办公软件、专业系统、数据分析工具、语言能力</li>
+                            <li><i class="fas fa-check-circle highlight mr-2"></i><strong>软技能：</strong>沟通能力、团队合作精神、解决问题能力等</li>
+                            <li><i class="fas fa-check-circle highlight mr-2"></i><strong>专业证书：</strong>物流师、采购师等助理级或员级证书</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-8 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-trophy text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold">奖项荣誉</h4>
+                        </div>
+                        <p class="mb-4">获得的奖学金、竞赛奖项、优秀学生干部等</p>
+                        <div class="bg-black p-3 rounded-lg text-sm opacity-80">
+                            <p><i class="fas fa-lightbulb highlight mr-2"></i>按重要性排列，突出与供应链相关的荣誉</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-24">
+                <h3 class="text-3xl font-bold mb-12 text-center">量化实习与项目成果的艺术</h3>
+                
+                <div class="bg-black p-8 rounded-lg mb-12">
+                    <p class="text-xl text-center mb-8">
+                        在描述实习和项目经历时，最能打动HR的就是可量化的成果。空泛的描述远不如具体的数字有说服力。
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">效率提升</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">示例：</p>
+                            <p>"通过优化拣货路径，协助将订单平均处理时间缩短了<span class="highlight font-bold">15%</span>"</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">成本降低</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">示例：</p>
+                            <p>"参与供应商比价工作，通过引入新的评估模型，协助团队将某物料的采购成本降低了<span class="highlight font-bold">5%</span>"</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">准确率提高</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">示例：</p>
+                            <p>"负责每日订单数据核对与录入，通过交叉核对机制，将数据录入错误率从<span class="highlight font-bold">2%</span>降低到<span class="highlight font-bold">0.5%</span>"</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">数量/规模</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">示例：</p>
+                            <p>"实习期间，独立跟进并管理了<span class="highlight font-bold">10家</span>核心供应商的日常订单"</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">客户/用户反馈</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">示例：</p>
+                            <p>"通过优化退换货流程，客户平均等待时间缩短了<span class="highlight font-bold">X天</span>，相关投诉率下降量<span class="highlight font-bold">Y%</span>"</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h4 class="text-xl font-bold">STAR法则</h4>
+                            </div>
+                            <p class="text-sm opacity-80 mb-2">描述结构：</p>
+                            <p><span class="highlight font-bold">S</span>ituation, <span class="highlight font-bold">T</span>ask, <span class="highlight font-bold">A</span>ction, <span class="highlight font-bold">R</span>esult</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-center">应届生简历常见误区与规避</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">信息冗余，重点不突出</h4>
+                                <p>简历上堆砌了大量与申请岗位不相关的课程、活动或兼职经历，反而淹没了真正有价值的信息</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">"一份简历投遍天下"</h4>
+                                <p>缺乏针对性，没有根据不同岗位的要求进行调整和优化，成功率自然低</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">低级错误</h4>
+                                <p>拼写错误、语法错误、标点错误，这些都非常致命</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-xl">一份精心打磨的简历，是你专业素养和认真态度的体现。请务必投入足够的时间和精力，让它成为你斩获面试机会的利器。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="interview" class="py-24 bg-gray-950 reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center">
+                决胜面试：<span class="highlight">面试准备</span>全攻略
+            </h2>
+            
+            <div class="bento-grid mb-16">
+                <div class="col-span-12 md:col-span-5 flex flex-col justify-center">
+                    <h3 class="text-3xl font-bold mb-6">洞悉面试流程</h3>
+                    <p class="text-xl leading-relaxed mb-6">
+                        当你的简历成功吸引了HR的注意，恭喜你，你已经拿到了进入下一轮的门票——面试。了解通常的面试流程，有助于你更好地进行针对性准备。
+                    </p>
+                    <p class="text-xl leading-relaxed">
+                        一般来说，校园招聘的面试流程可能包括以下几个环节。
+                    </p>
+                </div>
+                <div class="col-span-12 md:col-span-7">
+                    <div class="relative">
+                        <div class="absolute -inset-1 highlight-bg opacity-20 rounded-lg blur-xl"></div>
+                        <div class="relative bg-black p-8 rounded-lg border border-gray-800">
+                            <div class="flex flex-col space-y-6">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                        <span class="text-xl font-bold">1</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">简历筛选 <span class="en-accent">(Resume Screening)</span></h4>
+                                        <p class="opacity-80">这是第一道关卡，HR会根据岗位要求筛选出符合条件的候选人。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                        <span class="text-xl font-bold">2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">笔试/在线测评 <span class="en-accent">(Written Test/Online Assessment)</span></h4>
+                                        <p class="opacity-80">很多企业会设置这一环节，考察你的综合能力、逻辑思维、专业知识，甚至进行职业性格测试。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                        <span class="text-xl font-bold">3</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">小组面试/群面 <span class="en-accent">(Group Interview/Assessment Center)</span></h4>
+                                        <p class="opacity-80">通常是无领导小组讨论或案例分析的形式，考察你在团队中的沟通、协作、领导、分析和解决问题的能力。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                        <span class="text-xl font-bold">4</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">单面/多轮单面 <span class="en-accent">(Individual Interview)</span></h4>
+                                        <p class="opacity-80">这是最核心的环节，可能包括HR面试、业务部门面试、以及高层管理人员面试。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                        <span class="text-xl font-bold">5</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold">Offer发放 <span class="en-accent">(Offer Extension)</span></h4>
+                                        <p class="opacity-80">顺利通过所有考核后，你将收到录用通知。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-8 text-center">常见面试问题及应对策略</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">"请你做一下自我介绍"</h4>
+                        </div>
+                        <p class="mb-4 opacity-80"><span class="en-accent">(Tell me about yourself.)</span></p>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>时间控制在1-2分钟内</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>不要简单复述简历上的内容</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>突出与申请岗位最相关的亮点</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>运用"333法则"：过去-现在-未来</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-balance-scale text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">"谈谈你的优点和缺点"</h4>
+                        </div>
+                        <p class="mb-4 opacity-80"><span class="en-accent">(What are your strengths and weaknesses?)</span></p>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>优点：结合岗位要求，选择2-3个最突出的优点</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>用具体的例子来证明</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>缺点：选择对目标岗位影响不大的缺点</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>强调你已经意识到并正在积极改进</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-building text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">"你为什么选择我们公司？"</h4>
+                        </div>
+                        <p class="mb-4 opacity-80"><span class="en-accent">(Why are you interested in our company?)</span></p>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>展现出你对这家公司的深入了解</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>企业文化、行业地位、发展战略、产品服务等</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>结合自身的兴趣、能力和职业规划</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>说明这份工作如何能帮助你实现个人价值</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-road text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">"你的职业规划是什么？"</h4>
+                        </div>
+                        <p class="mb-4 opacity-80"><span class="en-accent">(What are your career goals?)</span></p>
+                        <ul class="space-y-2">
+                            <li><i class="fas fa-check highlight mr-2"></i>短期目标（未来1-3年）</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>长期目标（未来3-5年或更远）</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>确保职业规划与所申请的职位和行业发展方向契合</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>务实且有追求</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-8">供应链专业问题准备</h3>
+                <p class="text-xl mb-8 text-center">作为供应链专业的学生，面试中必然会遇到与专业知识相关的提问。这部分准备得如何，直接体现了你的专业功底：</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-book text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">回顾核心理论知识</h4>
+                        </div>
+                        <p class="mb-2">扎实掌握物流管理、采购管理、库存控制（如经济订货批量EOQ、安全库存）、生产计划与控制、供应链金融、精益生产（JIT）、供应商管理库存（VMI）、需求预测方法、运输管理、仓储管理等基本概念、原理和常用模型方法。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-clipboard-check text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">结合实践案例</h4>
+                        </div>
+                        <p class="mb-2">准备1-2个你在实习或课程项目中运用专业知识解决实际问题的案例。详细说明你在其中扮演的角色、面临的问题、分析问题的思路、采取的措施、运用的具体理论或工具，以及最终取得的成果或学到的经验。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-lightbulb text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">关注行业热点与新技术</h4>
+                        </div>
+                        <p class="mb-2">了解当前供应链领域的热点话题，如智慧物流、绿色供应链、数字化转型、大数据分析、人工智能、区块链技术在供应链中的应用等。面试官可能会问你对这些趋势的看法，或者它们如何影响未来的供应链运作。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-4">
+                                <i class="fas fa-cogs text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">流程理解与优化意识</h4>
+                        </div>
+                        <p class="mb-2">面试官可能会针对某个具体的供应链流程（如订单履行流程、退货流程、供应商选择流程等）提问，考察你的理解程度，甚至让你提出优化建议。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16 reveal-section">
+                <h3 class="text-3xl font-bold mb-8 text-center">行为面试与<span class="highlight">STAR法则</span></h3>
+                <p class="text-xl mb-6 leading-relaxed">很多企业，特别是外企和大型民企，在面试中非常青睐使用行为面试法（Behavioral Event Interview, BEI）。这类问题通常以"请你分享一个你过去……的经历"或"讲讲你曾经如何处理……的情况"等方式提问，目的是通过了解你过去的行为表现，来预测你未来的工作绩效。</p>
+                <p class="text-xl mb-8 leading-relaxed">应对行为面试问题的最佳工具就是<span class="highlight font-bold">STAR法则</span>：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center">
+                            <span class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">S</span>
+                            <span class="highlight">Situation</span>
+                            <span class="ml-2 text-sm opacity-80">情境</span>
+                        </h4>
+                        <p>清晰地描述事情发生的背景和具体情境。当时是什么样的情况？</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center">
+                            <span class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">T</span>
+                            <span class="highlight">Task</span>
+                            <span class="ml-2 text-sm opacity-80">任务</span>
+                        </h4>
+                        <p>你在这个情境下面临的具体任务、挑战或需要达成的目标是什么？</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center">
+                            <span class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">A</span>
+                            <span class="highlight">Action</span>
+                            <span class="ml-2 text-sm opacity-80">行动</span>
+                        </h4>
+                        <p>你针对这个任务或挑战，具体采取了哪些行动？这是STAR法则的核心，要详细说明你做了什么、怎么做的、为什么这么做，突出你的思考过程、决策依据和个人贡献。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center">
+                            <span class="w-10 h-10 rounded-full highlight-bg flex items-center justify-center mr-3">R</span>
+                            <span class="highlight">Result</span>
+                            <span class="ml-2 text-sm opacity-80">结果</span>
+                        </h4>
+                        <p>你的行动最终带来了什么结果？这个结果最好是积极的、可量化的。即使结果不尽如人意，也要说明你从中吸取了哪些教训，获得了哪些成长。</p>
+                    </div>
+                </div>
+                <p class="text-lg leading-relaxed">建议大家在面试前，针对常见的考察点（如解决问题能力、团队合作能力、领导力、创新能力、抗压能力、沟通能力、学习能力等），分别准备1-2个运用STAR法则组织好的故事案例。例如，中描述了一位项目经理主动承担L4自动驾驶测试驾照考试项目的技术项目经理职责，并成功应对挑战的例子，虽然不是实习生，但这种主动承担责任并取得成果的思路，完全可以借鉴到我们组织实习经历故事中。</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16 reveal-section">
+                <h3 class="text-3xl font-bold mb-8 text-center">小组面试 (<span class="highlight">群面</span>) 应对技巧</h3>
+                <p class="text-xl mb-6 leading-relaxed">小组面试，或称无领导小组讨论，是校招中常见的筛选环节，旨在短时间内考察多位候选人的综合素质。要想在群面中脱颖而出，你需要扮演好自己在团队中的角色，并展现出积极的贡献。以下是一些关键技巧：</p>
+                <div class="bento-grid">
+                    <div class="col-span-12 md:col-span-4 bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-4 flex items-center"><i class="fas fa-user-tie mr-3 highlight"></i>面试前的准备</h4>
+                        <ul class="space-y-1">
+                            <li><i class="fas fa-check highlight mr-2"></i>了解公司和职位：明确群面可能考察的能力与公司文化的契合度。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>熟悉群面题型：常见的有开放式问题、排序选择题、资源争夺题、实际操作题、案例分析题等。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i>注意着装和仪态：保持职业、自信的形象。</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-12 md:col-span-8 bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-4 flex items-center"><i class="fas fa-comments mr-3 highlight"></i>面试中的表现</h4>
+                        <ul class="space-y-1">
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">积极发言，自信表达：</span>不要害怕表达自己的观点，但要注意逻辑清晰、言简意赅。开场时可以主动破冰，或者在讨论陷入僵局时提出新的思路。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">认真倾听，尊重他人：</span>仔细听取其他成员的发言，不要随意打断。在表达不同意见时，要先肯定对方发言中的可取之处，然后委婉地提出自己的看法。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">推动进程，聚焦目标：</span>帮助团队明确讨论的目标和方向，适时引导讨论回归主题。如果发现团队偏离方向，要及时提醒。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">有效互动，促进合作：</span>鼓励不爱发言的组员参与讨论，协调不同意见，努力在团队内部达成共识。展现你的团队合作精神和影响力。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">注意时间管理：</span>群面通常有时间限制。可以主动承担计时员（Time Keeper）的角色，提醒大家注意时间分配，确保在规定时间内完成任务。</li>
+                            <li><i class="fas fa-check highlight mr-2"></i><span class="font-bold">角色定位：</span>不一定非要做领导者（Leader），也可以是优秀的贡献者（Contributor）、协调者（Coordinator）、总结者（Summarizer）或创新者（Idea Generator）。找到适合自己的角色，并发挥出价值。</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-12 bg-gray-900 p-6 rounded-lg mt-6">
+                        <h4 class="text-2xl font-bold mb-4 flex items-center"><i class="fas fa-redo-alt mr-3 highlight"></i>面试后的反思</h4>
+                        <p>每次群面结束后，都回顾一下自己在讨论中的表现，哪些地方做得好，哪些地方可以改进。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16 reveal-section">
+                <h3 class="text-3xl font-bold mb-8 text-center">向面试官提问的<span class="highlight">智慧</span></h3>
+                <p class="text-xl mb-6 leading-relaxed">面试的最后，面试官通常会问："你有什么问题想问我们吗？"这不仅是礼节性的环节，更是你展现对公司和职位的深度思考、以及获取更多信息的宝贵机会。千万不要说"我没有问题了"。</p>
+                <p class="text-lg mb-4 leading-relaxed">建议准备2-3个有质量的问题，可以从以下几个方面考虑：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-briefcase highlight mr-2"></i>关于岗位本身</h4>
+                        <ul class="space-y-2">
+                            <li>"这个岗位未来1-2年内，最重要的工作职责和挑战是什么？"</li>
+                            <li>"贵公司衡量这个岗位成功的关键绩效指标（KPIs）有哪些？"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-users highlight mr-2"></i>关于团队和文化</h4>
+                        <ul class="space-y-2">
+                            <li>"您能描述一下我将要加入的这个团队的氛围和工作方式吗？"</li>
+                            <li>"贵公司是如何支持新员工融入和成长的？"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-chart-line highlight mr-2"></i>关于公司发展</h4>
+                        <ul class="space-y-2">
+                            <li>"贵公司在未来几年，在供应链领域有哪些重要的发展规划或战略重点？"</li>
+                            <li>"您认为公司目前面临的最大机遇或挑战是什么？"</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-user-graduate highlight mr-2"></i>关于个人发展</h4>
+                        <ul class="space-y-2">
+                            <li>"如果我有幸加入，公司会提供哪些培训和职业发展的机会？"</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="text-xl font-bold mb-3 highlight">避免提问以下类型的问题：</h4>
+                <ul class="list-disc list-inside space-y-2 bg-gray-900 p-6 rounded-lg">
+                    <li>薪资福利待遇（除非面试官主动提及，或者已经到了谈Offer的阶段）。</li>
+                    <li>在公司官网或招聘简章上很容易就能找到答案的问题。</li>
+                    <li>过于宽泛或与自身关联不大的问题。</li>
+                </ul>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg reveal-section">
+                <h3 class="text-3xl font-bold mb-8 text-center">案例面试准备 <span class="en-accent highlight">(Case Interview Preparation)</span></h3>
+                <p class="text-xl mb-6 leading-relaxed">对于一些偏咨询、分析或战略类的供应链岗位，或者某些公司的管培生项目，可能会遇到案例面试。案例面试通常会给你一个商业问题或情境，要求你在一定时间内进行分析并提出解决方案。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-sitemap highlight mr-2"></i>熟悉基本框架</h4>
+                        <p>了解常用的案例分析框架，如市场规模估算、盈利能力分析、市场进入策略、运营优化等。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-brain highlight mr-2"></i>结构化思维</h4>
+                        <p>面对案例，最重要的是展现你的逻辑思维能力和结构化分析问题的能力。将复杂问题拆解成若干个小问题，逐一分析。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-pencil-ruler highlight mr-2"></i>多加练习</h4>
+                        <p>可以找一些经典的案例面试书籍或网站进行练习，熟悉不同类型的案例和解题思路。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-xl font-bold mb-3 flex items-center"><i class="fas fa-comments-dollar highlight mr-2"></i>沟通互动</h4>
+                        <p>在案例面试过程中，要积极与面试官沟通，澄清问题，阐述你的假设和分析过程，即使最终结论不完美，清晰的思考过程也能加分。</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-lg leading-relaxed">中提到的一些情景处理问题，如"客户投诉如何处理？"、"如果发现公司流程存在漏洞，你会怎么做？"，可以看作是微型案例。回答这类问题时，重点是展现你分析问题、解决问题的逻辑步骤和积极负责的态度。</p>
+                <p class="mt-8 text-xl text-center font-semibold">充分的面试准备，是<span class="highlight">自信</span>的来源。希望大家都能在面试中展现出最好的自己！</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategy" class="py-24 bg-gray-950 reveal-section">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="en-accent text-sm uppercase tracking-widest mb-2 highlight">CHAPTER 05</p>
+                <h2 class="text-4xl md:text-6xl font-bold">
+                    运筹帷幄：<span class="highlight">投递策略</span>与时间管理
+                </h2>
+                <p class="text-xl mt-4 opacity-80">STRATEGIZING: APPLICATION TACTICS & TIME MANAGEMENT</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-calendar-alt mr-3 highlight"></i>把握校招黄金时间线</h3>
+                <p class="text-xl leading-relaxed mb-6">校园招聘是一场有固定节奏的"战役"，了解并把握好各个时间节点至关重要，这能帮助你合理规划精力，不错失良机。中国的校园招聘主要可以分为以下几个阶段：</p>
+                <ul class="space-y-4 mb-8">
+                    <li><strong class="highlight">秋季招聘 (Autumn Recruitment)：</strong> 这是校招的"主战场"，也是企业招聘量最大、岗位类型最全面的时期。
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-1 opacity-80">
+                            <li><span class="font-semibold">提前批 (Early Bird / Pre-Recruitment)：</span> 通常在每年的6月至7月，甚至更早启动。一些知名企业为了提前锁定优秀人才，会开放提前批。提前批的特点是招聘周期相对较短，流程可能更快，如果能拿到Offer，就能提前"上岸"，并且通常不影响后续参加正式的秋招，相当于多了一次宝贵的求职机会。</li>
+                            <li><span class="font-semibold">正式秋招 (Formal Autumn Recruitment)：</span> 一般从7月底、8月初开始，各大企业陆续发布招聘公告，9月、10月进入投递和面试的高峰期（俗称"金九银十"），11月逐渐进入尾声。这是应届生求职的黄金窗口期。</li>
+                        </ul>
+                    </li>
+                    <li><strong class="highlight">秋招补录 (Supplementary Recruitment)：</strong> 在12月至次年1月，部分在秋招中未能招满的企业会进行补录。补录的信息往往不如正式秋招那样大规模宣传，需要同学们主动关注目标企业的动态。补录的好处是流程可能相对简化，有些企业甚至会免去笔试环节，直接进入面试。</li>
+                    <li><strong class="highlight">春季招聘 (Spring Recruitment)：</strong> 通常在次年的2月至5月进行。春招的规模和岗位数量一般会小于秋招，更多的是作为秋招的补充，或者是一些中小企业的主要招聘季。对于在秋招中未能如愿，或者考研、考公失利的同学来说，春招是另一个重要的机会窗口。此外，不少省市的公务员、事业单位集中招聘也常安排在春季或春夏之交。</li>
+                    <li><strong class="highlight">全年化趋势：</strong> 需要注意的是，随着人才竞争的加剧，一些企业，特别是对技术人才需求旺盛的互联网公司，其校园招聘的时间节点有不断提前的趋势，甚至部分岗位会全年开放招聘，计划性也越来越强。</li>
+                </ul>
+                <p class="text-lg mb-4">为了让大家更直观地了解，我整理了一个简表：</p>
+                <div class="overflow-x-auto bg-gray-900 p-4 rounded-lg">
+                    <h4 class="text-xl font-bold mb-3 text-center highlight">Table 1: 中国供应链行业校园招聘主要时间节点</h4>
+                    <p class="text-center en-accent opacity-70 mb-4">(Key Timelines for China Supply Chain Campus Recruitment)</p>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>招聘阶段 <span class="en-accent block">(Phase)</span></th>
+                                <th>通常时间 <span class="en-accent block">(Typical Months)</span></th>
+                                <th>主要特点 <span class="en-accent block">(Key Characteristics)</span></th>
+                                <th>备注 <span class="en-accent block">(Notes)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>秋招提前批 <span class="en-accent block">(Autumn Early)</span></td>
+                                <td>6月-7月</td>
+                                <td>优质企业抢人，流程快，机会宝贵</td>
+                                <td>通常不影响正式批，多一次机会</td>
+                            </tr>
+                            <tr>
+                                <td>正式秋招 <span class="en-accent block">(Formal Autumn)</span></td>
+                                <td>8月-11月 (高峰9-10月)</td>
+                                <td>规模最大，岗位最多最全，竞争激烈</td>
+                                <td>主要求职窗口</td>
+                            </tr>
+                            <tr>
+                                <td>秋招补录 <span class="en-accent block">(Autumn Supply.)</span></td>
+                                <td>12月-次年1月</td>
+                                <td>部分企业查漏补缺，流程可能简化</td>
+                                <td>信息相对分散，需主动关注</td>
+                            </tr>
+                            <tr>
+                                <td>春季招聘 <span class="en-accent block">(Spring)</span></td>
+                                <td>次年2月-5月</td>
+                                <td>秋招的补充，部分企业和中小企业为主，考研/公失利者机会</td>
+                                <td>岗位数量和质量可能不如秋招</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-6 text-lg leading-relaxed">大家要根据这些时间节点，提前做好实习、简历、笔面试的准备工作，做到心中有数，从容应对。</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-bullseye mr-3 highlight"></i>精准定位：选择适合的企业与岗位</h3>
+                <p class="text-xl leading-relaxed mb-6">在了解了时间线之后，更重要的是明确自己的求职目标。供应链领域非常广阔，不同的行业、不同性质的企业，以及不同的入门级岗位，其工作内容、发展路径和所需技能都会有所差异。</p>
+                <div class="bento-grid">
+                    <div class="col-span-12 md:col-span-6 bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3">行业类型 <span class="en-accent">(Industry Types)</span></h4>
+                        <ul class="list-disc list-inside space-y-2 opacity-80">
+                            <li>制造业：传统制造、智能制造、新能源汽车等。</li>
+                            <li>快速消费品 (FMCG)：食品饮料、日化用品等。</li>
+                            <li>零售与采购：线上电商、线下实体零售。</li>
+                            <li>交通/运输/物流服务商：第三方物流（3PL）、货代、快递。</li>
+                            <li>电商平台：淘宝、京东、拼多多等。</li>
+                            <li>咨询公司：供应链咨询业务。</li>
+                        </ul>
+                    </div>
+                    <div class="col-span-12 md:col-span-6 bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3">企业性质 <span class="en-accent">(Company Types)</span></h4>
+                        <p class="opacity-80">国有企业、外资企业、民营企业。它们在企业文化、薪酬福利体系、管理风格、职业发展路径等方面往往有较大差异，需要大家结合自身偏好进行选择。</p>
+                    </div>
+                    <div class="col-span-12 bg-gray-900 p-6 rounded-lg mt-6">
+                        <h4 class="text-2xl font-bold mb-3">常见入门级供应链岗位 <span class="en-accent">(Common Entry-Level Positions)</span></h4>
+                        <ul class="list-disc list-inside space-y-3 opacity-80">
+                            <li><span class="font-semibold">物流专员/助理：</span>负责订单跟踪与管理、业务流程的建立与改进、运输与仓储的协调、物流单证的处理、第三方物流的管理等。</li>
+                            <li><span class="font-semibold">采购专员/助理：</span>负责供应商资源的开发与审核引入、供应商关系管理、询价与议价、采购订单的下达与跟踪、采购合同的执行与归档、采购成本控制等。</li>
+                            <li><span class="font-semibold">计划专员/助理 (可细分为需求计划、生产计划、物料计划、供应计划等)：</span>这是供应链的"大脑"和"神经中枢"，负责需求预测、制定生产计划、进行物料需求计划与控制、管理库存水平、协调销售、生产、采购等各部门以确保供应链的顺畅运行。</li>
+                            <li><span class="font-semibold">供应链管培生 (Management Trainee - Supply Chain)：</span>很多大公司会设立管培生项目，旨在通过系统的轮岗和培训，培养未来的综合型供应链管理人才。</li>
+                            <li><span class="font-semibold">其他相关岗位：</span>如供应链运营专员、数据分析助理（供应链方向）、电商运营（涉及后端供应链管理）、客户服务（部分涉及物流协调和订单问题处理）等。</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-6 text-lg leading-relaxed">在选择时，务必结合自己的专业知识、技能特长、兴趣爱好以及初步的职业发展规划，进行综合考量。不要盲目跟风，适合自己的才是最好的。</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg mb-16">
+                <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-paper-plane mr-3 highlight"></i>多渠道投递，提高成功率</h3>
+                <p class="text-xl leading-relaxed mb-6">确定了目标方向后，就要开始行动了。为了提高拿到面试和Offer的几率，建议大家多渠道、有策略地进行投递：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-900 p-4 rounded-lg card-hover-effect"><i class="fas fa-building highlight mr-2"></i>企业校招官网/官方微信公众号</div>
+                    <div class="bg-gray-900 p-4 rounded-lg card-hover-effect"><i class="fas fa-desktop highlight mr-2"></i>主流招聘网站/APP</div>
+                    <div class="bg-gray-900 p-4 rounded-lg card-hover-effect"><i class="fas fa-chalkboard-teacher highlight mr-2"></i>校园宣讲会/双选会/招聘会</div>
+                    <div class="bg-gray-900 p-4 rounded-lg card-hover-effect"><i class="fas fa-users highlight mr-2"></i>内部推荐 (内推)</div>
+                </div>
+                <p class="text-lg leading-relaxed mb-4">在竞争激烈的就业市场中，单纯"广撒网"海投大量同质化简历，效果往往不佳。然而，机会毕竟有限，如果完全只盯着少数几家"梦中情司"，也可能错失良机。因此，关键在于找到"广度"和"深度"之间的平衡。</p>
+                <h4 class="text-2xl font-bold mb-4 highlight text-center">建议大家可以采取一种分层策略：</h4>
+                <ul class="space-y-3">
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-crown highlight mr-2"></i>第一梯队 (重点目标)：</strong>挑选出少数几家你最心仪、与你能力和规划最匹配的公司和岗位。投入最多时间和精力，深入研究，精心定制材料，积极寻找内推。这部分属于"精耕耘"。</li>
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-star highlight mr-2"></i>第二梯队 (潜力机会)：</strong>选择一批符合你大方向、有一定发展潜力的公司和岗位。进行标准化的针对性申请，在通用简历基础上适度修改。这部分属于"广撒网"，但仍需保持一定的针对性。</li>
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-certificate highlight mr-2"></i>第三梯队 (备选方案)：</strong>大批量的企业和岗位，作为保底选择。使用通用的标准化材料，快速高效地投递，避免"零Offer"的尴尬境地。</li>
+                </ul>
+                <p class="mt-6 text-lg leading-relaxed text-center">同时，要充分利用好校招的各个时间节点，动态调整你的投递策略。</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg">
+                <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-tasks mr-3 highlight"></i>高效管理多份申请</h3>
+                <p class="text-xl leading-relaxed mb-6">当你的投递量达到一定程度后，如何有效地管理这些申请，避免遗漏重要信息或错过截止日期，就显得尤为重要了：</p>
+                <ul class="space-y-3">
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-file-excel mr-2"></i>创建求职台账/进度表：</strong>用Excel或在线协作工具创建一个求职进度跟踪表。包含公司名称、申请岗位、投递日期、渠道、账号密码、当前状态、笔/面试时间、HR联系方式、备注等。</li>
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-archive mr-2"></i>定制化材料并存档：</strong>为重点岗位针对性修改简历和求职信，妥善保存并与台账对应。</li>
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-history mr-2"></i>及时记录和跟进：</strong>每次沟通、笔/面试后，及时更新台账，记录要点。面试后24小时内发送感谢信。</li>
+                    <li class="bg-gray-900 p-4 rounded-lg card-hover-effect"><strong class="text-xl flex items-center"><i class="fas fa-cogs mr-2"></i>利用招聘系统特性：</strong>留意企业招聘系统提供的便利功能，如调整志愿优先级、合并申请等。</li>
+                </ul>
+                <p class="mt-6 text-lg text-center font-semibold pulse-animation">科学的投递策略和有效的时间管理，能让你在纷繁复杂的校招信息中保持清醒的头脑，抓住每一个可能的机会。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="offer" class="py-24 reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center">
+                决策框架：<span class="highlight">Offer选择</span>与职业规划
+            </h2>
+            
+            <div class="space-y-12">
+                <div class="bg-black p-8 rounded-lg shadow-xl">
+                    <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-eye mr-3 highlight"></i>慧眼识珠：Offer仔细看</h3>
+                    <p class="text-xl leading-relaxed mb-6">当你经过前面所有的努力，终于收到了心仪的Offer，恭喜你！但在签约之前，还有一些关键的事项需要你认真考量：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold mb-3 flex items-center">
+                                <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-3 text-white">1</span>
+                                Offer Letter 关键条款
+                            </h4>
+                            <ul class="list-disc list-inside ml-4 space-y-1 opacity-80">
+                                <li>工作地点、薪资待遇结构 (基本、绩效、奖金、期权等)</li>
+                                <li>入职时间、试用期时长及转正条件</li>
+                                <li>岗位和部门具体信息、工作职责描述</li>
+                                <li>五险一金缴纳基数及比例，公积金提取政策</li>
+                                <li>加班制度、调休政策、年假</li>
+                                <li>保密协议、竞业限制条款等</li>
+                                <li>当地人才补贴政策（如适用）</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold mb-3 flex items-center">
+                                <span class="w-8 h-8 rounded-full highlight-bg flex items-center justify-center mr-3 text-white">2</span>
+                                企业与发展
+                            </h4>
+                            <ul class="list-disc list-inside ml-4 space-y-1 opacity-80">
+                                <li>企业规模、发展阶段和市场地位</li>
+                                <li>所属行业发展趋势与公司战略方向</li>
+                                <li>团队氛围和工作方式 (可向面试官或学长学姐了解)</li>
+                                <li>晋升路径、培训体系和人才培养机制</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black p-8 rounded-lg shadow-xl">
+                    <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-chart-line mr-3 highlight"></i>着眼长远发展，而非短期利益</h3>
+                    <p class="text-lg leading-relaxed">第一份工作是你职业生涯的基石。它所能提供的<span class="highlight">学习机会</span>、<span class="highlight">成长空间</span>、以及为你打下的<span class="highlight">行业基础</span>，将深刻影响你未来的职业高度。选择一个能让你不断学习和提升的平台，积累宝贵的经验和技能，远比单纯追求起薪的数字更有价值。</p>
+                </div>
+
+                <div class="bg-black p-8 rounded-lg shadow-xl">
+                    <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-handshake mr-3 highlight"></i>薪酬谈判的技巧与禁忌</h3>
+                    <p class="text-lg leading-relaxed mb-4">在拿到口头Offer，并且对工作内容、岗位职责基本满意后，如果薪酬未达到你的合理预期，可以尝试进行礼貌的薪酬谈判。关键在于展现你的价值，并进行合理的沟通。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold mb-3">谈判技巧 <span class="en-accent">(Negotiation Skills)</span></h4>
+                            <ul class="list-disc list-inside space-y-2 opacity-80">
+                                <li><span class="font-semibold">了解市场行情：</span>研究同行业、同岗位、同地区应届生薪资水平。</li>
+                                <li><span class="font-semibold">明确自身价值：</span>结合自身能力、实习经验、项目成果。</li>
+                                <li><span class="font-semibold">选择合适时机：</span>通常在收到正式Offer后，签约前。</li>
+                                <li><span class="font-semibold">态度诚恳礼貌：</span>表达清晰、有理有据。</li>
+                                <li><span class="font-semibold">关注整体薪酬包：</span>除月薪外，还包括年终奖、补贴、福利等。</li>
+                                <li><span class="font-semibold">准备备选方案：</span>如果薪资无法调整，可尝试争取其他福利或培训机会。</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold mb-3">谈判禁忌 <span class="en-accent">(Negotiation Taboos)</span></h4>
+                            <ul class="list-disc list-inside space-y-2 opacity-80">
+                                <li>初期就主动提及薪酬。</li>
+                                <li>漫天要价，或期望值远超市场水平。</li>
+                                <li>反复摇摆不定，或接受Offer后又用其他Offer要求加薪。</li>
+                                <li>将薪酬作为唯一标准，忽视其他重要因素。</li>
+                                <li>语气强硬或威胁。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-black p-8 rounded-lg shadow-xl">
+                    <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-times-circle mr-3 highlight"></i>优雅地拒绝Offer</h3>
+                    <p class="text-lg leading-relaxed">当你决定接受其中一个Offer后，对于其他机会，也需要妥善处理。专业和礼貌地拒绝一个Offer，不仅是对对方公司的尊重，也是为你自己积累良好职业口碑的一部分：</p>
+                    <ul class="list-disc list-inside space-y-2 bg-gray-900 p-6 rounded-lg opacity-80">
+                        <li><span class="font-semibold">及时告知：</span>一旦做出决定，尽快通知你决定放弃的公司HR。</li>
+                        <li><span class="font-semibold">真诚感谢：</span>通过电话或邮件，首先表达对公司给予机会的感谢。</li>
+                        <li><span class="font-semibold">委婉说明：</span>简要说明拒绝原因（例如：已接受其他更符合个人发展规划的Offer），不必过于详细或批评。</li>
+                        <li><span class="font-semibold">祝福对方：</span>表达对公司未来发展的良好祝愿。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-black p-8 rounded-lg shadow-xl">
+                    <h3 class="text-3xl font-bold mb-6 text-center"><i class="fas fa-user-cog mr-3 highlight"></i>从校园到职场：心态调整与初步规划</h3>
+                    <p class="text-lg leading-relaxed mb-4 text-center">拿到心仪的Offer，只是职业生涯的开始。从校园人到职场人的转变，需要一个适应和调整的过程：</p>
+                    <ul class="space-y-3 bg-gray-900 p-6 rounded-lg">
+                        <li><strong class="text-xl block mb-1">正视期望与现实的差距：</strong>实际工作内容可能与想象不同，甚至有基础性、重复性的工作。保持谦虚务实的心态，从基层做起，积累经验。</li>
+                        <li><strong class="text-xl block mb-1">保持持续学习的热情与能力：</strong>供应链行业知识和技术在不断更新，进入职场后学习不能停止。主动学习新技能，关注行业动态。</li>
+                        <li><strong class="text-xl block mb-1">培养和践行职业素养：</strong>责任心、敬业精神、时间观念、注重细节、有效沟通、团队合作、解决问题的能力。</li>
+                        <li><strong class="text-xl block mb-1">为自己设定短期和长期目标：</strong>
+                            <ul class="list-disc list-inside ml-6 mt-2 space-y-1 opacity-80">
+                                <li>短期目标（入职3-6个月）：尽快熟悉公司环境、业务流程、岗位职责；掌握核心工作技能；与同事建立良好合作关系；争取能够独立完成常规任务。</li>
+                                <li>长期思考（1-3年）：明确自己的职业发展方向（例如，是成为某个领域的专家，还是向管理岗位发展）；思考如何参与更有挑战性的项目，提升自己的核心竞争力。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="mt-6 text-lg text-center font-semibold">这个转变的过程可能会有挑战，但也充满了成长的机遇。希望大家都能顺利度过适应期，在职场中不断学习，快速成长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="summary" class="py-24 bg-gray-950 reveal-section">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                 <p class="en-accent text-sm uppercase tracking-widest mb-2 highlight">CHAPTER 07</p>
+                <h2 class="text-4xl md:text-6xl font-bold">
+                    总结与<span class="highlight">寄语</span>
+                </h2>
+                <p class="text-xl mt-4 opacity-80">SUMMARY & FINAL WORDS</p>
+            </div>
+
+            <div class="bg-black p-8 rounded-lg">
+                <h3 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-clipboard-list mr-3 highlight"></i>核心要点回顾</h3>
+                <p class="text-xl leading-relaxed mb-6">时间过得很快，今天的分享也接近尾声了。在结束之前，我们再简单回顾一下今天讨论的核心要点：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center"><i class="fas fa-medal highlight mr-2"></i>实习是王道</h4>
+                        <p class="opacity-80">尽早规划，积极寻找有价值的实习机会，通过实践来提升专业技能，积累项目经验，这是你简历上最硬核的竞争力。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center"><i class="fas fa-id-card highlight mr-2"></i>简历是门面</h4>
+                        <p class="opacity-80">精心打磨你的简历，确保内容真实、简洁、精准匹配岗位需求，用可量化的成果来展现你的价值。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center"><i class="fas fa-user-friends highlight mr-2"></i>面试是考验</h4>
+                        <p class="opacity-80">充分准备各类面试，熟悉常见的面试问题和应对技巧，特别是要掌握STAR法则来组织你的经历，展现你的专业素养、逻辑思维和学习潜力。</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center"><i class="fas fa-chess-knight highlight mr-2"></i>策略是关键</h4>
+                        <p class="opacity-80">把握好校园招聘的各个时间节点，了解不同阶段的特点，多渠道、有策略地进行投递，平衡好"广撒网"与"精耕耘"。</p>
+                    </div>
+                     <div class="col-span-1 md:col-span-2 bg-gray-900 p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold mb-3 flex items-center"><i class="fas fa-lightbulb highlight mr-2"></i>选择是智慧</h4>
+                        <p class="opacity-80">理性分析和选择Offer，不要只看眼前的薪资，更要着眼于长期的职业发展平台、学习成长机会和行业前景。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                 <p class="text-2xl md:text-3xl mb-8 opacity-90 leading-relaxed">
+                   
+                </p>
+                <p class="text-xl md:text-2xl mb-8 opacity-80 leading-relaxed">
+                </p>
+                <h3 class="text-3xl md:text-5xl my-12 text-center">
+                  
+                </h3>
+                <p class="en-accent text-lg uppercase tracking-widest">
+                    MAY YOUR FUTURE BE <span class="highlight">BRIGHT</span> AND <span class="highlight">PROMISING</span>!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 校招干货分享模块 -->
+    <section id="xiaohongshu" class="xiaohongshu-section reveal-section">
+        <div class="xiaohongshu-container">
+            <div class="xiaohongshu-header">
+                <h2>校招干货分享</h2>
+                <p>关注我们的校招干货账号，获取最新校招动态、简历优化、面试技巧和行业洞察</p>
+            </div>
+            
+            <div class="xiaohongshu-card fade-in-up">
+                <div class="xiaohongshu-banner">
+                    <div class="xiaohongshu-logo">
+                        <img src="touxiang.jpg" alt="江辰学长" class="xiaohongshu-avatar">
+                    </div>
+                    <div class="xiaohongshu-profile">
+                        <h3>江辰学长</h3>
+                        <p>校招求职经验分享，提供面试技巧和简历优化指导</p>
+                    </div>
+                    <a href="https://www.xiaohongshu.com/user/profile/5c55025600000000110360c4" target="_blank" class="xiaohongshu-follow">
+                        <i class="fas fa-plus"></i>关注
+                    </a>
+                </div>
+                
+                <div class="xiaohongshu-content">
+                    <div class="xiaohongshu-categories">
+                        <div class="xiaohongshu-category active" data-category="all">
+                            <i class="fas fa-th"></i>全部
+                        </div>
+                        <div class="xiaohongshu-category" data-category="resume">
+                            <i class="fas fa-file-alt"></i>简历优化
+                        </div>
+                        <div class="xiaohongshu-category" data-category="interview">
+                            <i class="fas fa-comments"></i>面试技巧
+                        </div>
+                        <div class="xiaohongshu-category" data-category="offer">
+                            <i class="fas fa-award"></i>Offer选择
+                        </div>
+                        <div class="xiaohongshu-category" data-category="company">
+                            <i class="fas fa-building"></i>企业分析
+                        </div>
+                    </div>
+                    
+                    <div class="xiaohongshu-articles active" data-content="all">
+                        <div class="xiaohongshu-article">
+                            <div class="article-meta">
+                                <span class="article-tag">简历优化</span>
+                                <span class="article-date">3天前</span>
+                            </div>
+                            <h4 class="article-title">一份能让HR眼前一亮的简历是什么样的？</h4>
+                            <p class="article-excerpt">分享8个让简历脱颖而出的实用技巧，以及3个真实案例分析...</p>
+                            <div class="article-footer">
+                                <div class="article-stats">
+                                    <div class="article-stat"><i class="fas fa-heart"></i>328</div>
+                                    <div class="article-stat"><i class="fas fa-comment"></i>42</div>
+                                </div>
+                                <a href="#" class="read-more">阅读全文</a>
+                            </div>
+                        </div>
+                        
+                        <div class="xiaohongshu-article">
+                            <div class="article-meta">
+                                <span class="article-tag">面试技巧</span>
+                                <span class="article-date">1周前</span>
+                            </div>
+                            <h4 class="article-title">校招面试中如何回答"你的优缺点是什么"</h4>
+                            <p class="article-excerpt">深度解析HR最常问的面试问题，掌握这些技巧轻松应对...</p>
+                            <div class="article-footer">
+                                <div class="article-stats">
+                                    <div class="article-stat"><i class="fas fa-heart"></i>521</div>
+                                    <div class="article-stat"><i class="fas fa-comment"></i>87</div>
+                                </div>
+                                <a href="#" class="read-more">阅读全文</a>
+                            </div>
+                        </div>
+                        <div class="xiaohongshu-article">
+                            <div class="article-meta">
+                                <span class="article-tag">Offer选择</span>
+                                <span class="article-date">2周前</span>
+                            </div>
+                            <h4 class="article-title">拿到多个offer怎么选？这份决策指南请收好</h4>
+                            <p class="article-excerpt">从薪资、发展前景、公司文化等多维度教你如何做出最佳选择...</p>
+                            <div class="article-footer">
+                                <div class="article-stats">
+                                    <div class="article-stat"><i class="fas fa-heart"></i>436</div>
+                                    <div class="article-stat"><i class="fas fa-comment"></i>65</div>
+                                </div>
+                                <a href="#" class="read-more">阅读全文</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="xiaohongshu-articles" data-content="resume">
+                        <!-- 简历优化相关内容 -->
+                        <div class="xiaohongshu-article">
+                            <div class="article-meta">
+                                <span class="article-tag">简历优化</span>
+                                <span class="article-date">3天前</span>
+                            </div>
+                            <h4 class="article-title">一份能让HR眼前一亮的简历是什么样的？</h4>
+                            <p class="article-excerpt">分享8个让简历脱颖而出的实用技巧，以及3个真实案例分析...</p>
+                            <div class="article-footer">
+                                <div class="article-stats">
+                                    <div class="article-stat"><i class="fas fa-heart"></i>328</div>
+                                    <div class="article-stat"><i class="fas fa-comment"></i>42</div>
+                                </div>
+                                <a href="#" class="read-more">阅读全文</a>
+                            </div>
+                        </div>
+                        
+                        <div class="xiaohongshu-article">
+                            <div class="article-meta">
+                                <span class="article-tag">简历优化</span>
+                                <span class="article-date">2周前</span>
+                            </div>
+                            <h4 class="article-title">校招简历中的项目经历该怎么写？</h4>
+                            <p class="article-excerpt">教你用STAR法则包装项目经历，即使是课程项目也能有亮点...</p>
+                            <div class="article-footer">
+                                <div class="article-stats">
+                                    <div class="article-stat"><i class="fas fa-heart"></i>275</div>
+                                    <div class="article-stat"><i class="fas fa-comment"></i>38</div>
+                                </div>
+                                <a href="#" class="read-more">阅读全文</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 其他分类内容同理 -->
+                    <div class="xiaohongshu-articles" data-content="interview">
+                        <!-- 面试技巧相关内容 -->
+                    </div>
+                    
+                    <div class="xiaohongshu-articles" data-content="offer">
+                        <!-- Offer选择相关内容 -->
+                    </div>
+                    
+                    <div class="xiaohongshu-articles" data-content="company">
+                        <!-- 企业分析相关内容 -->
+                    </div>
+                    
+                    <div class="xiaohongshu-more">
+                        <a href="https://www.xiaohongshu.com/user/profile/5c55025600000000110360c4" target="_blank" class="btn-more">
+                            查看更多内容 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 供应链薪水模块 -->
+    <section id="salary" class="salary-section reveal-section">
+        <div class="salary-container">
+            <div class="salary-card">
+                <div class="salary-header">
+                    <h3>供应链薪资大揭秘</h3>
+                    <p>2024年供应链各细分岗位薪资水平与福利分析</p>
+                </div>
+                <div class="salary-info">
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">15K-25K</div>
+                        <div class="salary-stat-label">供应链规划师<br>(大型制造业)</div>
+                    </div>
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">12K-20K</div>
+                        <div class="salary-stat-label">采购专员<br>(一线城市)</div>
+                    </div>
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">10K-18K</div>
+                        <div class="salary-stat-label">物流专员<br>(电商平台)</div>
+                    </div>
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">18K-30K</div>
+                        <div class="salary-stat-label">高级计划员<br>(外资企业)</div>
+                    </div>
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">15K-25K</div>
+                        <div class="salary-stat-label">供应商管理师<br>(科技行业)</div>
+                    </div>
+                    <div class="salary-stat">
+                        <div class="salary-stat-value">12K-22K</div>
+                        <div class="salary-stat-label">库存控制专员<br>(零售行业)</div>
+                    </div>
+                </div>
+                <div class="salary-footer">
+                    <p class="mb-4 opacity-80">想了解更多薪资数据和行业福利情况？</p>
+                    <a href="https://y1xpdq8ja50.feishu.cn/share/base/view/shrcnL4OV9BYR7YcNi0dtFDObwf" target="_blank">查看完整薪资报告 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- OfferShow APP模块 -->
+    <section id="recruitment-app" class="recruitment-app-section reveal-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 text-center">
+                校招必备<span class="highlight">APP</span>推荐
+            </h2>
+            <p class="text-xl text-center mb-16 max-w-3xl mx-auto">
+                OfferShow - 国内领先的校招信息分享平台，帮助你掌握最新校招动态
+            </p>
+            
+            <div class="offershow-features">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="qiuzhiribao.png" alt="OfferShow求职日报" class="feature-img">
+                    </div>
+                    <h3 class="feature-title">求职日报</h3>
+                    <p class="feature-desc">每日更新最新校招动态，包括招聘信息、宣讲会安排、截止日期提醒等，助你把握每一个机会</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="xinzijiaoliu.png" alt="OfferShow薪资查询" class="feature-img">
+                    </div>
+                    <h3 class="feature-title">薪资查询</h3>
+                    <p class="feature-desc">浏览各大企业最新校招薪资数据，包括基本工资、奖金、福利等详细信息，做出更明智的职业决策</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <img src="qiuyejiaoliu.png" alt="OfferShow求职交流" class="feature-img">
+                    </div>
+                    <h3 class="feature-title">求职交流</h3>
+                    <p class="feature-desc">与其他求职者分享经验，讨论面试问题，互助互惠，提高求职成功率和效率</p>
+                </div>
+            </div>
+            
+            <div class="app-cta">
+                <a href="#" class="app-download-btn">
+                    <i class="fas fa-download mr-2"></i> 立即下载
+                </a>
+                <p class="app-hint">支持iOS和Android平台，扫描小程序码也可直接使用</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+    <!-- 合工大物流管理专业群模块 -->
+    <section id="qq-group" class="qq-group-section reveal-section">
+        <div class="qq-group-container">
+            <div class="qq-group-header">
+                <h3>加入合工大物流管理专业群</h3>
+                <p>与志同道合的同学和校友交流，分享经验，互助成长</p>
+            </div>
+            <div class="qq-group-card">
+                <div class="qq-group-info">
+                    <div class="qq-group-name">合工大物流管理交流群</div>
+                  
+                </div>
+                <div class="qq-group-qrcode" style="width: auto; height: auto; padding: 0; background-color: transparent;">
+                    <img src="qqqun.jpg" alt="QQ群二维码" style="width: 100%; max-width: 300px; height: auto; border-radius: 0.5rem;">
+                </div>
+                <div class="qq-group-hint">使用手机QQ扫描上方二维码加入</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-black border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-map-marker-alt highlight mr-2"></i> 联系我们
+                    </h3>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2 opacity-70"></i> supplychain@example.com</p>
+                    <p class="mb-2"><i class="fas fa-phone mr-2 opacity-70"></i> +86 123 4567 8901</p>
+                    <p><i class="fas fa-map-pin mr-2 opacity-70"></i> 中国·北京</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-link highlight mr-2"></i> 快速链接
+                    </h3>
+                    <ul class="space-y-2">
+                        <li><a href="#intro" class="hover:text-red-500 transition-colors"><i class="fas fa-chevron-right mr-2 opacity-70"></i> 引言</a></li>
+                        <li><a href="#resume" class="hover:text-red-500 transition-colors"><i class="fas fa-chevron-right mr-2 opacity-70"></i> 简历技巧</a></li>
+                        <li><a href="#interview" class="hover:text-red-500 transition-colors"><i class="fas fa-chevron-right mr-2 opacity-70"></i> 面试攻略</a></li>
+                        <li><a href="#strategy" class="hover:text-red-500 transition-colors"><i class="fas fa-chevron-right mr-2 opacity-70"></i> 投递策略</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-share-alt highlight mr-2"></i> 关注我们
+                    </h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-bilibili"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-zhihu"></i>
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                                           </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center opacity-70">
+                <p>&copy; 2024-2025 供应链校招全攻略. All Rights Reserved.</p>
+                <p class="text-sm mt-2">由姜昌林学长倾情奉献 <span class="en-accent">(PRESENTED BY AI SENIOR)</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 頁面載入動畫 -->
+    <div id="page-loader" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-16 h-16 rounded-full highlight-bg mx-auto mb-4 animate-ping"></div>
+            <p class="text-xl font-bold text-white">正在载入<span class="loading-dots">...</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 頁面載入完成後隱藏載入動畫
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            setTimeout(function() {
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s ease';
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 800);
+            
+            // 初始化 AOS 動畫
+            AOS.init({
+                duration: 800,
+                once: false,
+                mirror: true
+            });
+        });
+    
+        // JavaScript for reveal animations and chart
+        document.addEventListener('DOMContentLoaded', function () {
+            // 載入點動畫
+            const loadingDots = document.querySelector('.loading-dots');
+            let dotCount = 0;
+            setInterval(function() {
+                dotCount = (dotCount + 1) % 4;
+                loadingDots.textContent = '.'.repeat(dotCount);
+            }, 300);
+        
+            const revealSections = document.querySelectorAll('.reveal-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Unobserve after revealing to save resources
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 }); // Adjust threshold as needed
+
+            revealSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Chart.js - 示例图表
+            const ctx = document.getElementById('marketTrendsChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2020', '2021', '2022', '2023', '2024 (预计)'],
+                        datasets: [{
+                            label: '网络招聘市场规模 (亿元)',
+                            data: [120, 135, 150, 168, 183],
+                            borderColor: 'var(--highlight-color)',
+                            tension: 0.1,
+                            backgroundColor: 'rgba(226, 33, 28, 0.1)',
+                            fill: true,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: '#fff' }
+                            },
+                            x: {
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                ticks: { color: '#fff' }
+                            }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#fff' } }
+                        }
+                    }
+                });
+            }
+            
+            // 移动端导航栏切换
+            const mobileMenuButton = document.querySelector('.md\\:hidden .fa-bars');
+            const mainNav = document.querySelector('nav'); // Get the nav element
+            let mobileMenu = null; // Initialize mobileMenu to null
+
+            if (mobileMenuButton && mainNav) {
+                mobileMenuButton.addEventListener('click', () => {
+                    if (!mobileMenu) { // Create menu only if it doesn't exist
+                        mobileMenu = document.createElement('div');
+                        mobileMenu.classList.add('mobile-menu', 'absolute', 'top-full', 'left-0', 'right-0', 'bg-black', 'bg-opacity-95', 'p-4', 'md:hidden', 'flex', 'flex-col', 'space-y-2');
+                        mobileMenu.style.display = 'none';
+                        
+                        const navLinksContainer = document.querySelector('.hidden.md\\:flex');
+                        if (navLinksContainer) {
+                            const linksHTML = Array.from(navLinksContainer.children)
+                                .map(link => `<a href="${link.getAttribute('href')}" class="block py-2 text-white hover:highlight transition-colors text-center">${link.textContent}</a>`)
+                                .join('');
+                            mobileMenu.innerHTML = linksHTML;
+                            mainNav.appendChild(mobileMenu); // Append to nav, not document body
+
+                            mobileMenu.querySelectorAll('a').forEach(link => {
+                                link.addEventListener('click', () => {
+                                    mobileMenu.style.display = 'none';
+                                });
+                            });
+                        }
+                    }
+                    
+                    // Toggle display with animation
+                    if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+                        mobileMenu.style.display = 'flex';
+                        mobileMenu.style.opacity = '0';
+                        mobileMenu.style.transform = 'translateY(-20px)';
+                        mobileMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        setTimeout(() => {
+                            mobileMenu.style.opacity = '1';
+                            mobileMenu.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        mobileMenu.style.opacity = '0';
+                        mobileMenu.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            mobileMenu.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // 添加滾動到頂部按鈕
+            const scrollToTopBtn = document.createElement('button');
+            scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            scrollToTopBtn.className = 'fixed bottom-6 right-6 w-12 h-12 rounded-full highlight-bg text-white z-40 opacity-0 pointer-events-none transition-all duration-300 shadow-lg';
+            document.body.appendChild(scrollToTopBtn);
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100');
+                } else {
+                    scrollToTopBtn.classList.remove('opacity-100');
+                    scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 小紅書分類切換功能
+            const categories = document.querySelectorAll('.xiaohongshu-category');
+            const articleSets = document.querySelectorAll('.xiaohongshu-articles');
+            
+            categories.forEach(category => {
+                category.addEventListener('click', () => {
+                    // 移除所有激活状态
+                    categories.forEach(c => c.classList.remove('active'));
+                    articleSets.forEach(a => a.classList.remove('active'));
+                    
+                    // 添加当前类别的激活状态
+                    category.classList.add('active');
+                    const target = category.getAttribute('data-target');
+                    document.getElementById(`${target}-articles`).classList.add('active');
+                });
+            });
+            
+            // 添加申请追踪按钮事件处理
+            const addApplicationBtn = document.querySelector('.add-application-btn');
+            if (addApplicationBtn) {
+                addApplicationBtn.addEventListener('click', (e) => {
+                    if (!addApplicationBtn.href) {
+                        e.preventDefault();
+                        window.open('https://y1xpdq8ja50.feishu.cn/share/base/view/shrcnL4OV9BYR7YcNi0dtFDObwf', '_blank');
+                    }
+                });
+            }
+        });
+
+        // Function to export HTML table to CSV
+        function exportTableToCSV(tableId, filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("#" + tableId + " table tr");
+            
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (var j = 0; j < cols.length; j++) {
+                    // Clean cell content: remove HTML tags, extra spaces, and handle commas
+                    let cellText = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, " ").replace(/\s+/g, " ").trim();
+                    // Escape double quotes by doubling them
+                    cellText = cellText.replace(/"/g, '""');
+                    // Enclose in double quotes if it contains a comma, newline, or double quote
+                    if (cellText.includes(',') || cellText.includes('\n') || cellText.includes('"')) {
+                        cellText = '"' + cellText + '"';
+                    }
+                    row.push(cellText);
+                }
+                csv.push(row.join(","));
+            }
+
+            // Download CSV file
+            var csvFile = new Blob([csv.join("\n")], {type: "text/csv"});
+            var downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+        
+        // Add event listener for the export button of Table 2
+        document.addEventListener('DOMContentLoaded', function() {
+            const offerTableContainer = document.querySelector('#offer .overflow-x-auto.bg-gray-950');
+            if (offerTableContainer) {
+                offerTableContainer.id = 'offerComparisonTableContainer'; // Give a unique ID to the container
+                const exportButton = offerTableContainer.querySelector('button');
+                if (exportButton) {
+                    // We need to ensure the table itself has an ID for the querySelectorAll to work directly on it.
+                    // Let's assign an ID to the table element directly.
+                    const tableElement = offerTableContainer.querySelector('table.custom-table');
+                    if (tableElement) {
+                        tableElement.id = "offerComparisonTableActual"; // ID for the actual table
+                        exportButton.classList.add('btn-highlight');
+                        exportButton.onclick = function() {
+                            exportTableToCSV('offerComparisonTableActual', 'offer_comparison.csv');
+                        };
+                    }
+                }
+            }
+            
+            // 為部分元素添加 AOS 動畫效果
+            document.querySelectorAll('.card-hover-effect').forEach(function(element) {
+                element.setAttribute('data-aos', 'fade-up');
+                element.setAttribute('data-aos-delay', '100');
+            });
+            
+            // 為主要標題添加 AOS 動畫
+            document.querySelectorAll('section h2').forEach(function(element) {
+                element.setAttribute('data-aos', 'fade-down');
+                element.setAttribute('data-aos-duration', '800');
+            });
+            
+            // 為圖表添加 AOS 動畫
+            const chartContainer = document.querySelector('#marketTrendsChart').parentElement;
+            if (chartContainer) {
+                chartContainer.setAttribute('data-aos', 'zoom-in');
+                chartContainer.setAttribute('data-aos-duration', '1000');
+            }
+            
+            // 小红书模块标签切换
+            const xiaohongshuCategories = document.querySelectorAll('.xiaohongshu-category');
+            const xiaohongshuArticleSets = document.querySelectorAll('.xiaohongshu-articles');
+            
+            xiaohongshuCategories.forEach(category => {
+                category.addEventListener('click', () => {
+                    // 移除所有激活状态
+                    xiaohongshuCategories.forEach(c => c.classList.remove('active'));
+                    xiaohongshuArticleSets.forEach(a => a.classList.remove('active'));
+                    
+                    // 添加当前类别的激活状态
+                    category.classList.add('active');
+                    const target = category.getAttribute('data-target');
+                    document.getElementById(`${target}-articles`).classList.add('active');
+                });
+            });
+        });
+    </script>
+    
+
+
